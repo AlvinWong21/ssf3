@@ -1,3 +1,4 @@
 node_modules
 main_test.js
 search.js
+.gitignore

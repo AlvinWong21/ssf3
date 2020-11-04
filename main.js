@@ -60,7 +60,7 @@ app.get('/search',
 
         //create an array to hold all the URL
         const searchResults = []
-        for (let index = 0; index < 10; index++) {
+        for (let index = 0; index < 10; index++) {  
             searchResults.push(giphy.data[index].images.fixed_height.url)   //url of fixed_height images
         }
         console.info(searchResults)
@@ -68,6 +68,41 @@ app.get('/search',
         resp.type('text/html')
         resp.render('search', {search, searchResults})
         // resp.end()  //don't send anything
+        
+        //recommended solution
+        // const imgs = []
+        // for (let d of giphy.data) {     //of returns content, in returns index (for array)
+        //     const title = d.title    //in case there is no title, which will return an error
+        //     //using square bracket method:
+        //     // const title = d['title']     //use when unsure if the object contains this attribute
+        //     const url = d.images.fixed_height.url
+        //     //using square bracket method:
+        //     // const url = d['images']['fixed_height']['url']
+        //     imgs.push({ title,url })      //array includes both title and url
+        //         //equivalent to:
+        //         // {title: title, url: url}
+        // }
+
+        //alternate solution
+        // const imgs = giphy.data
+        //        .filter(  //just an example of .filter
+        //            d=> {
+        //                return !d.title.includes(f**k)   //filters out expletive
+        //            }
+        //        )
+        // .map{ //loops through the array and will pass you every single element, can map data from one array to another
+        //     (d) => {
+        //         return { title: d.title, url: d.images.fixed_height.url }   //returning an oject as an element in the imgs array
+        //     }  
+
+        // console.info(imgs)
+
+        // resp.status(200)
+        // resp.type('text/html')
+        // resp.render('giphy', { search, imgs, hasContent: imgs.length > 0 })
+        // // hasContent: !!imgs.length   //two bangs(!). 1: boolean to check if false which returns true, 2: convert to false
+
+
     }
 )
 
